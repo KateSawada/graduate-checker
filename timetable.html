@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        .main-table {border: 2px solid;}
+        .table-elem {border: 1px solid; width: 180px; height: 30px;}
+        .lect-select {width: 170px; margin: 5px;}
+    </style>
+</head>
+<body>
+    <div class="title">
+        時間割&単位管理ツール
+    </div>
+
+    <div>
+        <div>
+            <table class="main-table">
+                <tr>1年春</tr>
+                <tr>
+                    <td rowspan="2">時限</td>
+                    <td class="table-elem week-day" colspan="2">月</td>
+                    <td class="table-elem week-day" colspan="2">火</td>
+                    <td class="table-elem week-day" colspan="2">水</td>
+                    <td class="table-elem week-day" colspan="2">木</td>
+                    <td class="table-elem week-day" colspan="2">金</td>
+                </tr>
+                <tr>
+                    <td class="table-elem half-term">春1</td>
+                    <td class="table-elem half-term">春2</td>
+                    <td class="table-elem half-term">春1</td>
+                    <td class="table-elem half-term">春2</td>
+                    <td class="table-elem half-term">春1</td>
+                    <td class="table-elem half-term">春2</td>
+                    <td class="table-elem half-term">春1</td>
+                    <td class="table-elem half-term">春2</td>
+                    <td class="table-elem half-term">春1</td>
+                    <td class="table-elem half-term">春2</td>
+                </tr>
+                <tr>
+                    <!-- id: 学年-春/秋-曜日-時限-春1/春2 -->
+                    <td class="time-index">1限</td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-1-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-1-1" hidden></div> <div id="type-1-1-1-1-1" hidden></div> <div id="sq-1-1-1-1-1" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-1-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-1-1" hidden></div> <div id="type-1-1-2-1-1" hidden></div> <div id="sq-1-1-2-1-1" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-2-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-2-1" hidden></div> <div id="type-1-1-1-2-1" hidden></div> <div id="sq-1-1-1-2-1" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-2-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-2-1" hidden></div> <div id="type-1-1-2-2-1" hidden></div> <div id="sq-1-1-2-2-1" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-3-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-3-1" hidden></div> <div id="type-1-1-1-3-1" hidden></div> <div id="sq-1-1-1-3-1" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-3-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-3-1" hidden></div> <div id="type-1-1-2-3-1" hidden></div> <div id="sq-1-1-2-3-1" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-4-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-4-1" hidden></div> <div id="type-1-1-1-4-1" hidden></div> <div id="sq-1-1-1-4-1" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-4-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-4-1" hidden></div> <div id="type-1-1-2-4-1" hidden></div> <div id="sq-1-1-2-4-1" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-5-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-5-1" hidden></div> <div id="type-1-1-1-5-1" hidden></div> <div id="sq-1-1-1-5-1" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-5-1" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-5-1" hidden></div> <div id="type-1-1-2-5-1" hidden></div> <div id="sq-1-1-2-5-1" hidden></div> </td>
+                </tr>
+                <tr>
+                    <td class="time-index">2限</td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-1-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-1-2" hidden></div> <div id="type-1-1-1-1-2" hidden></div> <div id="sq-1-1-1-1-2" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-1-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-1-2" hidden></div> <div id="type-1-1-2-1-2" hidden></div> <div id="sq-1-1-2-1-2" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-2-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-2-2" hidden></div> <div id="type-1-1-1-2-2" hidden></div> <div id="sq-1-1-1-2-2" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-2-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-2-2" hidden></div> <div id="type-1-1-2-2-2" hidden></div> <div id="sq-1-1-2-2-2" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-3-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-3-2" hidden></div> <div id="type-1-1-1-3-2" hidden></div> <div id="sq-1-1-1-3-2" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-3-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-3-2" hidden></div> <div id="type-1-1-2-3-2" hidden></div> <div id="sq-1-1-2-3-2" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-4-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-4-2" hidden></div> <div id="type-1-1-1-4-2" hidden></div> <div id="sq-1-1-1-4-2" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-4-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-4-2" hidden></div> <div id="type-1-1-2-4-2" hidden></div> <div id="sq-1-1-2-4-2" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-5-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-5-2" hidden></div> <div id="type-1-1-1-5-2" hidden></div> <div id="sq-1-1-1-5-2" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-5-2" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-5-2" hidden></div> <div id="type-1-1-2-5-2" hidden></div> <div id="sq-1-1-2-5-2" hidden></div> </td>
+                </tr>
+                <tr>
+                    <td class="time-index">3限</td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-1-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-1-3" hidden></div> <div id="type-1-1-1-1-3" hidden></div> <div id="sq-1-1-1-1-3" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-1-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-1-3" hidden></div> <div id="type-1-1-2-1-3" hidden></div> <div id="sq-1-1-2-1-3" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-2-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-2-3" hidden></div> <div id="type-1-1-1-2-3" hidden></div> <div id="sq-1-1-1-2-3" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-2-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-2-3" hidden></div> <div id="type-1-1-2-2-3" hidden></div> <div id="sq-1-1-2-2-3" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-3-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-3-3" hidden></div> <div id="type-1-1-1-3-3" hidden></div> <div id="sq-1-1-1-3-3" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-3-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-3-3" hidden></div> <div id="type-1-1-2-3-3" hidden></div> <div id="sq-1-1-2-3-3" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-4-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-4-3" hidden></div> <div id="type-1-1-1-4-3" hidden></div> <div id="sq-1-1-1-4-3" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-4-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-4-3" hidden></div> <div id="type-1-1-2-4-3" hidden></div> <div id="sq-1-1-2-4-3" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-5-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-5-3" hidden></div> <div id="type-1-1-1-5-3" hidden></div> <div id="sq-1-1-1-5-3" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-5-3" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-5-3" hidden></div> <div id="type-1-1-2-5-3" hidden></div> <div id="sq-1-1-2-5-3" hidden></div> </td>
+                </tr>
+                <tr>
+                    <td class="time-index">4限</td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-1-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-1-4" hidden></div> <div id="type-1-1-1-1-4" hidden></div> <div id="sq-1-1-1-1-4" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-1-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-1-4" hidden></div> <div id="type-1-1-2-1-4" hidden></div> <div id="sq-1-1-2-1-4" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-2-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-2-4" hidden></div> <div id="type-1-1-1-2-4" hidden></div> <div id="sq-1-1-1-2-4" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-2-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-2-4" hidden></div> <div id="type-1-1-2-2-4" hidden></div> <div id="sq-1-1-2-2-4" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-3-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-3-4" hidden></div> <div id="type-1-1-1-3-4" hidden></div> <div id="sq-1-1-1-3-4" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-3-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-3-4" hidden></div> <div id="type-1-1-2-3-4" hidden></div> <div id="sq-1-1-2-3-4" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-4-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-4-4" hidden></div> <div id="type-1-1-1-4-4" hidden></div> <div id="sq-1-1-1-4-4" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-4-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-4-4" hidden></div> <div id="type-1-1-2-4-4" hidden></div> <div id="sq-1-1-2-4-4" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-5-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-5-4" hidden></div> <div id="type-1-1-1-5-4" hidden></div> <div id="sq-1-1-1-5-4" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-5-4" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-5-4" hidden></div> <div id="type-1-1-2-5-4" hidden></div> <div id="sq-1-1-2-5-4" hidden></div> </td>
+                </tr>
+                <tr>
+                    <td class="time-index">5限</td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-1-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-1-5" hidden></div> <div id="type-1-1-1-1-5" hidden></div> <div id="sq-1-1-1-1-5" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-1-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-1-5" hidden></div> <div id="type-1-1-2-1-5" hidden></div> <div id="sq-1-1-2-1-5" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-2-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-2-5" hidden></div> <div id="type-1-1-1-2-5" hidden></div> <div id="sq-1-1-1-2-5" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-2-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-2-5" hidden></div> <div id="type-1-1-2-2-5" hidden></div> <div id="sq-1-1-2-2-5" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-3-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-3-5" hidden></div> <div id="type-1-1-1-3-5" hidden></div> <div id="sq-1-1-1-3-5" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-3-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-3-5" hidden></div> <div id="type-1-1-2-3-5" hidden></div> <div id="sq-1-1-2-3-5" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-4-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-4-5" hidden></div> <div id="type-1-1-1-4-5" hidden></div> <div id="sq-1-1-1-4-5" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-4-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-4-5" hidden></div> <div id="type-1-1-2-4-5" hidden></div> <div id="sq-1-1-2-4-5" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-1-5-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-1-5-5" hidden></div> <div id="type-1-1-1-5-5" hidden></div> <div id="sq-1-1-1-5-5" hidden></div> </td>
+                    <td class="table-elem"> <div> <select id="select-1-1-2-5-5" class="lect-select" name=""> <option value="未選択">未選択</option> </select> <div id="cred-1-1-2-5-5" hidden></div> <div id="type-1-1-2-5-5" hidden></div> <div id="sq-1-1-2-5-5" hidden></div> </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <table class="main-table">
+                <tr>1年秋</tr>
+                <tr>
+                    <td class="table-elem week-day" colspan="2">月</td>
+                    <td class="table-elem week-day" colspan="2">火</td>
+                    <td class="table-elem week-day" colspan="2">水</td>
+                    <td class="table-elem week-day" colspan="2">木</td>
+                    <td class="table-elem week-day" colspan="2">金</td>
+                </tr>
+                <tr>
+                    <td class="table-elem half-term">秋1</td>
+                    <td class="table-elem half-term">秋2</td>
+                    <td class="table-elem half-term">秋1</td>
+                    <td class="table-elem half-term">秋2</td>
+                    <td class="table-elem half-term">秋1</td>
+                    <td class="table-elem half-term">秋2</td>
+                    <td class="table-elem half-term">秋1</td>
+                    <td class="table-elem half-term">秋2</td>
+                    <td class="table-elem half-term">秋1</td>
+                    <td class="table-elem half-term">秋2</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="./data.js"></script>
+<script type="text/javascript" src="./main.js"></script>
