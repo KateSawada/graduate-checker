@@ -79,12 +79,16 @@ function changedSelect(e){
     let changedSelect = document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1]] + daysDict[this.params[2]] + timeDict[this.params[3]]);
     console.log(this.params);
     console.log(changedSelect.value);
-    lectureData[termDataDict[this.params[1]]][daysDataDict[this.params[2]]][timeDataDict[this.params[3]]].forEach(obj => {
-        if(obj.name == changedSelect.value){
-            changedLectObj = obj;
-            return true; //break の代わり
-        }
-    })
+    if (changedSelect.value != "未選択"){
+        lectureData[termDataDict[this.params[1]]][daysDataDict[this.params[2]]][timeDataDict[this.params[3]]].forEach(obj => {
+            if(obj.name == changedSelect.value){
+                changedLectObj = obj;
+                return true; //break の代わり
+            }
+        })
+    } else {
+        changedLectObj = {name: "未選択", cred: 0, seme: "q"}
+    }
     if (changedLectObj.seme == "s"){ //セメスター制の講義だったら
         //右の講義を未選択にする→非表示&colspanを2に
         document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1] + 1] + daysDict[this.params[2]] + timeDict[this.params[3]]).selectedIndex = 0;
@@ -97,7 +101,29 @@ function changedSelect(e){
         document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1] + 1] + daysDict[this.params[2]] + timeDict[this.params[3]]).parentNode.parentNode.hidden = false;
         changedSelect.parentNode.parentNode.setAttribute("colSpan", "1");
     }
+    
     //下に講義が続くか確認する
+    if (changedSelect.value != "未選択"){
+        //選ばれた要素より後のコマについて  ---------出現しなくなったら終わる処理
+        for (let i = this.params[3] + 1; i < 5; i++){ 
+            //データの該当のコマの講義を検索して
+            for(let k = 0; k < lectureData[termDataDict[this.params[1]]][daysDataDict[this.params[2]]][timeDataDict[i]].length; k++){
+                //講義が次のコマも続くようならば
+                if (lectureData[termDataDict[this.params[1]]][daysDataDict[this.params[2]]][timeDataDict[i]][k].name == changedSelect.value){
+                    //optionを調べて
+                    for(let j = 0; j < document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1]] + daysDict[this.params[2]] + timeDict[i]).childElementCount; j++){
+                        //該当講義を選択
+                        if (document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1]] + daysDict[this.params[2]] + timeDict[i]).children[j].textContent == changedSelect.value){
+                            document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1]] + daysDict[this.params[2]] + timeDict[i]).selectedIndex = j;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //上も同様にチェック
+
+    
 }
 
 
