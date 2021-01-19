@@ -73,9 +73,31 @@ for(let i = 0; i < 1; i++){ //grade
     }
 }
 function changedSelect(e){
+    //講義データのオブジェクト
+    let changedLectObj;
+    //値が変わったselect要素
+    let changedSelect = document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1]] + daysDict[this.params[2]] + timeDict[this.params[3]]);
     console.log(this.params);
-    console.log(document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1]] + daysDict[this.params[2]] + timeDict[this.params[3]]).value);
+    console.log(changedSelect.value);
+    lectureData[termDataDict[this.params[1]]][daysDataDict[this.params[2]]][timeDataDict[this.params[3]]].forEach(obj => {
+        if(obj.name == changedSelect.value){
+            changedLectObj = obj;
+            return true; //break の代わり
+        }
+    })
+    if (changedLectObj.seme == "s"){ //セメスター制の講義だったら
+        //右の講義を未選択にする→非表示&colspanを2に
+        document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1] + 1] + daysDict[this.params[2]] + timeDict[this.params[3]]).selectedIndex = 0;
+        document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1] + 1] + daysDict[this.params[2]] + timeDict[this.params[3]]).parentNode.parentNode.hidden = true;
 
+        changedSelect.parentNode.parentNode.setAttribute("colSpan", "2");
+        
+    } else  if (changedLectObj.seme == "q" && [0, 2].includes(this.params[1])){
+        //春1or秋1だったら右の講義のhiddenを解除する→colspanを2に
+        document.getElementById("select" + gradDict[this.params[0]] + termDict[this.params[1] + 1] + daysDict[this.params[2]] + timeDict[this.params[3]]).parentNode.parentNode.hidden = false;
+        changedSelect.parentNode.parentNode.setAttribute("colSpan", "1");
+    }
+    //下に講義が続くか確認する
 }
 
 
