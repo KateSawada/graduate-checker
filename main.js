@@ -6,6 +6,8 @@
     ↑そこに各学年の表にジャンプするボタン
 
     [未]各種処理を関数化
+    [未]人社の教養科目のdata.jsへの追加
+
 
     バグ
     連続講義を選ぶ時にセメスター制講義と干渉する部分
@@ -54,6 +56,7 @@ let userTable = Array.from(new Array(8), () => {
     return Array.from(new Array(10), () => new Array(5).fill("未選択"))
 })
 
+//時間割表(選択肢)の初期化
 for(let i = 0; i < 1; i++){ //grade
     for(let j = 0; j < 2; j++){ //term
         for(let k = 0; k < 5; k++){ //day
@@ -99,9 +102,7 @@ for(let i = 0; i < 1; i++){ //grade
     }
 }
 
-function updatedTable(){
-    
-}
+
 
 function changedSelectListenerWrapper(e){
     changedSelect(this.params);
