@@ -293,13 +293,6 @@ const lectureData = {
                     cred: 2
                 },
                 {
-                    name: "情報リテラシー（理系）",
-                    type: "理系教養科目",
-                    seme: "s",
-                    cont: false,
-                    cred: 2
-                },
-                {
                     name: "情報科学入門",
                     type: "理系教養科目",
                     seme: "s",
@@ -711,13 +704,7 @@ const lectureData = {
                 }
             ],
             time5: [
-                {
-                    name: "",
-                    type: "",
-                    seme: "s",
-                    cont: false,
-                    cred: 0
-                }
+                
             ]
         },
         thu: {
