@@ -99,6 +99,10 @@ for(let i = 0; i < 1; i++){ //grade
     }
 }
 
+function updatedTable(){
+    
+}
+
 function changedSelectListenerWrapper(e){
     changedSelect(this.params);
 }
