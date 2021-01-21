@@ -7,6 +7,8 @@
 //totalは，そのカテゴリの合計を表す(詳細は学部の便覧p34~39)
 //lectは，必修の講義名
 //requiredCred[0]: 情報システム系 requiredCred[1]: 知能システム系
+
+
 const requiredCred = [
     {
         zengakukyouiku: {
@@ -22,7 +24,7 @@ const requiredCred = [
             kisokyouyou: {
                 total: [10, 1000],
                 lect: [],
-                bunkei: [6, 1000],
+                bunkeikamoku: [6, 1000],
                 rikeikyouyou: [2, 1000],
                 zengakukyouyou: [2, 1000]
             },
@@ -32,7 +34,7 @@ const requiredCred = [
             }
         },
         senmon: {
-            total: [84, 0],
+            total: [84, 1000],
             senmonkiso: {
                 total: [30, 34],
                 lect: [
@@ -42,7 +44,7 @@ const requiredCred = [
                     "システム数学及び演習1", "システム数学及び演習2", "論理学1", "論理学2c（CS）", "データマイニング入門（CS）"
                 ]
             },
-            senmon: {
+            senmonkamoku: {
                 total: [42, 50],
                 lect: [
                     "情報倫理と法", "ソフトウエア開発法及び演習", "オブジェクト指向言語及び演習", "代数的構造", "オートマトン・形式言語及び演習", "符号理論", "数値解析及び演習", 
@@ -52,6 +54,9 @@ const requiredCred = [
                     "非手続型言語及び演習", "先端計算機アーキテクチャ1", "先端計算機アーキテクチャ2", "オペレーティング・システム及び演習1", "オペレーティング・システム及び演習2",
                     "ソフトウェア設計法1", "ソフトウェア設計法2", "情報ネットワーク", "ネットワークセキュリティ", "計算理論"
                 ]
+            },
+            kanrensenmon: {
+                total: [2, 10]
             }
         }
     },
@@ -89,7 +94,7 @@ const requiredCred = [
                     "システム数学及び演習1", "システム数学及び演習2", "論理学1", "論理学2c（CS）", "データマイニング入門（CS）"
                 ]
             },
-            senmon: {
+            senmonkamoku: {
                 total: [42, 50],
                 lect: [
                     "情報倫理と法", "ソフトウエア開発法及び演習", "オブジェクト指向言語及び演習", "代数的構造", "オートマトン・形式言語及び演習", "符号理論", "数値解析及び演習", 
@@ -110,7 +115,7 @@ const requiredCred = [
     name: 講義名
     type: 講義区分
     seme: s/q セメスターorクオーター
-    cred: 単位数 複数時限連続の講義は,最初の時限以外は0
+    cred: 単位数
     ↓例
 {
     name: "講義名",
@@ -160,7 +165,7 @@ const lectureData = {
                     name: "信号処理",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "情報哲学",
@@ -236,19 +241,19 @@ const lectureData = {
                     name: "離散数学及び演習（自然，人社）",
                     type: "専門基礎科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "離散数学及び演習（CS）",
                     type: "専門基礎科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "計算機アーキテクチャ基礎及び演習1",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 1.5
                 },
                 {
                     name: "心理・認知科学実験2",
@@ -288,13 +293,13 @@ const lectureData = {
             time1: [
                 {
                     name: "英語(サバイバル)",
-                    type: "言語文化1",
+                    type: "言語文化1英",
                     seme: "s",
-                    cred: 1
+                    cred: 0
                 },
                 {
                     name: "英語(基礎)",
-                    type: "言語文化1",
+                    type: "言語文化1英",
                     seme: "s",
                     cred: 1
                 },
@@ -428,7 +433,7 @@ const lectureData = {
             time2: [
                 {
                     name: "二外1",
-                    type: "言語文化1",
+                    type: "言語文化1二",
                     seme: "s",
                     cred: 1.5
                 },
@@ -514,7 +519,7 @@ const lectureData = {
                     name: "非手続型言語及び演習",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "博物館展示情報論",
@@ -526,7 +531,7 @@ const lectureData = {
             time3: [
                 {
                     name: "英語(基礎)",
-                    type: "言語文化1",
+                    type: "言語文化1英",
                     seme: "s",
                     cred: 1
                 },
@@ -584,13 +589,13 @@ const lectureData = {
                     name: "計算機アーキテクチャ基礎及び演習2",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 1.5
                 },
                 {
                     name: "社会心理学演習",
                     type: "専門科目(人間・社会情報)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "数理情報学演習6",
@@ -751,7 +756,7 @@ const lectureData = {
                 },
                 {
                     name: "英語(上級)",
-                    type: "言語文化1",
+                    type: "言語文化1英",
                     seme: "s",
                     cred: 2
                 },
@@ -777,7 +782,7 @@ const lectureData = {
             time2: [
                 {
                     name: "二外2",
-                    type: "言語文化1",
+                    type: "言語文化1二",
                     seme: "s",
                     cred: 1.5
                 },
@@ -791,7 +796,7 @@ const lectureData = {
                     name: "機械学習",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "システム検証及び演習",
@@ -867,19 +872,19 @@ const lectureData = {
                     name: "物理学実験",
                     type: "理系基礎(理系)",
                     seme: "s",
-                    cred: 0
+                    cred: 1.5
                 },
                 {
                     name: "コンピュータ科学実験1",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 1.5
                 },
                 {
                     name: "認知心理学演習",
                     type: "専門科目(人間・社会情報)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "数理情報学4",
@@ -899,7 +904,7 @@ const lectureData = {
                     name: "コンピュータ科学実験1",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 1.5
                 },
                 {
                     name: "社会情報系演習5",
@@ -971,13 +976,13 @@ const lectureData = {
                     name: "数値解析及び演習",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "知能ロボットシステム制御",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "ソーシャルメディアと観光・コミュニティ",
@@ -1011,7 +1016,7 @@ const lectureData = {
                     name: "情報の挑戦者・開拓者たち",
                     type: "専門基礎科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "ソフトウエア開発法及び演習",
@@ -1090,7 +1095,7 @@ const lectureData = {
                     name: "オートマトン・形式言語及び演習",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 3
                 },
                 {
                     name: "情報芸術論",
@@ -1128,13 +1133,13 @@ const lectureData = {
                     name: "オートマトン・形式言語及び演習",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 3
                 },
                 {
                     name: "PBL2",
                     type: "専門科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 }
             ],
             time5: [
@@ -1155,7 +1160,7 @@ const lectureData = {
                     name: "PBL3",
                     type: "専門科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 }
             ],
             time3: [
@@ -1201,7 +1206,7 @@ const lectureData = {
                     name: "アカデミック・イングリッシュ",
                     type: "専門科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 }
             ],
             time5: [
@@ -1331,7 +1336,7 @@ const lectureData = {
                     name: "アカデミック・ライティング",
                     type: "専門科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 }
             ],
             time5: [
@@ -1357,7 +1362,7 @@ const lectureData = {
                     name: "PBL1",
                     type: "専門科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 }
             ],
             time3: [
@@ -1639,19 +1644,19 @@ const lectureData = {
                     name: "プログラミング1（自然）",
                     type: "専門基礎科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "プログラミング1（人社）",
                     type: "専門基礎科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "プログラミング1（CS）",
                     type: "専門基礎科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "情報ネットワーク",
@@ -1785,7 +1790,7 @@ const lectureData = {
             time2: [
                 {
                     name: "二外3",
-                    type: "言語文化1",
+                    type: "言語文化1二",
                     seme: "s",
                     cred: 1.5
                 },
@@ -1863,7 +1868,7 @@ const lectureData = {
                     name: "生体情報処理",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "科学技術社会論",
@@ -1943,7 +1948,7 @@ const lectureData = {
             time3: [
                 {
                     name: "英語(コミュニケーション)",
-                    type: "言語文化1",
+                    type: "言語文化1英",
                     seme: "s",
                     cred: 2
                 },
@@ -1961,12 +1966,7 @@ const lectureData = {
                 }
             ],
             time4: [
-                {
-                    name: "",
-                    type: "",
-                    seme: "s",
-                    cred: 0
-                }
+
             ],
             time5: [
                 
@@ -2068,7 +2068,7 @@ const lectureData = {
             time2: [
                 {
                     name: "二外4",
-                    type: "言語文化1",
+                    type: "言語文化1二",
                     seme: "s",
                     cred: 1.5
                 },
@@ -2088,7 +2088,7 @@ const lectureData = {
                     name: "心理・認知科学データ解析",
                     type: "専門科目(人間・社会情報)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "計算情報学7",
@@ -2140,7 +2140,7 @@ const lectureData = {
                     name: "コンピュータ科学実験2",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 1.5
                 },
                 {
                     name: "数理情報学5",
@@ -2160,7 +2160,7 @@ const lectureData = {
                     name: "コンピュータ科学実験2",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 1.5
                 },
                 {
                     name: "社会情報系演習7",
@@ -2174,7 +2174,7 @@ const lectureData = {
             time1: [
                 {
                     name: "英語(中級)",
-                    type: "言語文化1",
+                    type: "言語文化1英",
                     seme: "s",
                     cred: 1
                 },
@@ -2236,7 +2236,7 @@ const lectureData = {
                     name: "確率統計及び演習",
                     type: "専門基礎科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 }
             ],
             time5: [
@@ -2291,13 +2291,13 @@ const lectureData = {
                     name: "プログラミング2（自然，人社）",
                     type: "専門基礎科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "プログラミング2（CS）",
                     type: "専門基礎科目",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "ネットワークセキュリティ",
@@ -2577,13 +2577,13 @@ const lectureData = {
                     name: "画像処理",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "コンピュータ科学実験3",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
-                    cred: 0
+                    cred: 1
                 }
             ],
             time5: [
@@ -2668,7 +2668,7 @@ const lectureData = {
                     name: "心理・認知科学実験1",
                     type: "専門科目(人間・社会情報)",
                     seme: "q",
-                    cred: 0
+                    cred: 2
                 },
                 {
                     name: "数理情報学演習2",

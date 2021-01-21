@@ -12,7 +12,7 @@
         }
         #judge-table {
             border: 2px solid;
-            width: 90%;
+            width: 98%;
         }
         #judge-table td {
             border: 1px solid;
@@ -20,6 +20,7 @@
         }
 
     </style>
+
 </head>
 <body>
     <div class="headerbar" id="headerbar">
@@ -28,24 +29,43 @@
             <table id="judge-table">
                 <tbody>
                     <tr>
-                        <td>卒業できる?</td><td>判定結果</td>
+                        <td>系を選んでね</td><td>
+                            <select id="select-sub-course"><option value="情シス">情シス</option><option value="知シス">知シス</option></select>
+                        </td><td>卒業できる?</td><td>判定結果</td><td colspan="2">全学教育科目(専門系以外すべて)(<span id="zengakukyouiku-min"></span>~<span id="zengakukyouiku-max"></span>)&nbsp;合計:<span id="zengakukyouiku-tital"></span></td>
                     </tr>
                     <tr>
-                        <td colspan="2">専門系</td><td colspan="2">全学基礎科目</td><td colspan="2">文系基礎&文系教養&理系教養&全学教養</td><td colspan="2">理系基礎</td>
+                        <td colspan="2">専門系科目(<span id="senmon-min"></span>~<span id="senmon-max"></span>)&nbsp;合計:<span id="senmon-total"></span></td><td colspan="2">全学基礎科目(<span id="zengakukiso-min"></span>~<span id="zengakukiso-max"></span>)&nbsp;合計:<span id="zengakukiso-total"></span></td><td colspan="2">文系基礎&文系教養&理系教養&全学教養(<span id="kisokyouyou-min"></span>~<span id="kisokyouyou-max"></span>)&nbsp;合計:<span id="kisokyouyou-total"></span></td><td colspan="2">理系基礎(<span id="rikeikiso-min"></span>~<span id="rikeikiso-max"></span>)&nbsp;合計:<span id="rikeikiso-total"></span></td>
                     </tr>
                     <tr>
-                        <td>専門基礎(<span>84</span>~<span></span>)</td><td>a</td><td>基礎セミナー</td><td>a</td><td>文系科目</td><td>a</td><td>理系基礎</td><td>a</td>
+                        <td>専門基礎(<span id="senmonkiso-min"></span>~<span id="senmonkiso-max"></span>)</td><td><span id="senmonkiso-total"></span></td><td>基礎セミナー(<span id="kisemi-min"></span>~<span id="kisemi-max"></span>)</td><td><span id="kisemi-total"></span></td><td>文系基礎&文系教養(<span id="bunkeikamoku-min"></span>~<span id="bunkeikamoku-max"></span>)</td><td><span id="bunkeikamoku-total"></span></td>
+                        <td valign="top" colspan="1" rowspan="4" >
+                            <div>
+                                <div>エラー一覧</div>
+                                <div style="height:100px; overflow-x:scroll;">
+                                    <ul id="error-list">
+                                        <li>a</li>
+                                        <li>b</li>
+                                        <li>a</li>
+                                        <li>b</li>
+                                        <li>a</li>
+                                        <li>b</li>
+                                        <li>a</li>
+                                        <li>b</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td>専門科目</td><td>a</td><td>英語</td><td>a</td><td>理系教養</td><td>a</td>
+                        <td>専門科目(<span id="senmonkamoku-min"></span>~<span id="senmonkamoku-max"></span>)</td><td><span id="senmonkamoku-total"></span></td><td>英語(<span id="eigo-min"></span>~<span id="eigo-max"></span>)</td><td><span id="eigo-total"></span></td><td>理系教養(<span id="rikeikyouyou-min"></span>~<span id="rikeikyouyou-max"></span>)</td><td><span id="rikeikyouyou-total"></span></td>
                     </tr>
                     <tr>
-                        <td>関連専門科目</td><td>a</td><td>二外</td><td>a</td><td>全学教養</td><td>a</td>
+                        <td>関連専門科目(<span id="kanrensenmon-min"></span>~<span id="kanrensenmon-max"></span>)</td><td><span id="kanrensenmon-total"></span></td><td>二外(<span id="nigai-min"></span>~<span id="nigai-max"></span>)</td><td><span id="nigai-total"></span></td><td>全学教養(<span id="zengakukyouyou-min"></span>~<span id="zengakukyouyou-max"></span>)</td><td><span id="zengakukyouyou-total"></span></td>
                     </tr>
                     <tr>
                         <td>卒業研究終わった?</td>
-                        <td><input type="radio" name="gr" value="はい"> はい<input type="radio" name="gr" value="いいえ" checked> いいえ</td>
-                            <td>健スポ</td><td>a</td><td>その他</td><td>a</td>
+                        <td><select id="researchFinished"><option value="いいえ">いいえ</option><option value="はい">はい</option></select></td>
+                            <td>健スポ(<span id="kensupo-min"></span>~<span id="kensupo-max"></span>)</td><td>a</td><td>その他</td><td>a</td>
                     </tr>
                 </tbody>
             </table>

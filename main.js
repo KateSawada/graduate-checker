@@ -1,4 +1,6 @@
 /*
+    深夜に脳死で書いていたので，クソ汚い実装になっています．ご容赦ください．
+
     メモ
     [問題なかった]専門基礎の関連専門が分けれてない
     [済]selectの幅をピクセル数じゃなくて%で指定する
@@ -6,7 +8,11 @@
     ↑そこに各学年の表にジャンプするボタン
 
     [未]各種処理を関数化
-    [未]人社の教養科目のdata.jsへの追加
+    [未]jsによる時間割のhtml要素tableの生成
+
+    [未]各所のfor文ぶん回しのゴリ押しを解消したい(データ構造の見直しが必要？)
+
+    [未]人社の教養科目のdata.jsへの追加(誰かに頼みたい)
 
 
     バグ
@@ -30,6 +36,7 @@ option2.text = "created2";
 elem.appendChild(option2);
 */
 
+
 //fixedの対応
 var headerbarHeight = document.getElementById("headerbar").clientHeight;
 document.getElementById("tablearea").style.paddingTop = (headerbarHeight + 10) + "px";
@@ -42,14 +49,88 @@ const termDataDict = ["spring1", "spring2", "autumn1", "autumn2"];
 const daysDataDict = ["mon", "tue", "wed", "thu", "fri"]
 const timeDataDict = ["time1", "time2", "time3", "time4", "time5"];
 
-//選択中の連続講義を格納する
-let continuousLectures = [];
-
-//学科選択に対応
+//学科選択に対応する時に使うやつ
 //0: 自然 1: 人社 2:cs
 const courses = {0: "自然情報", 1: "人間・社会情報", 2: "コンピュータ科"};
 let majorIn = 2;
 let notMajorIn = [0, 1];
+
+let subCourses = 0;
+document.getElementById("select-sub-course").addEventListener("change", changedSubCourse);
+function changedSubCourse(){
+    subCourses = document.getElementById("select-sub-course").selectedIndex;    
+}
+
+
+const senmonORkanrensenmonDict = {
+    0: [ //自然の場合
+        "senmonkamoku", "kanrensenmon", "kanrensenmon"
+    ],
+    1: [ //人社の場合
+        "kanrensenmon", "senmonkamoku", "kanrensenmon"
+    ],
+    2: [ //CSの場合
+        "kanrensenmon", "kanrensenmon", "senmonkamoku"
+    ]
+}
+
+//時間割データを保存する
+let currentTable = {};
+//同じ名前の講義を複数回履修しても，単位は1回分しか出ない(基セミを除く)
+//計算済の講義を格納する配列
+let calcedLect = [];
+//単位集計用
+let currentCred = {
+    "基礎セミナー": 0,
+    "言語文化1英": 0,
+    "言語文化1二": 0,
+    "健康スポーツ科学": 0, 
+    "文系基礎科目": 0,
+    "文系教養科目": 0,
+    "理系教養科目": 0,
+    "全学教養科目": 0,
+    "理系基礎(理系)": 0,
+    "専門基礎科目": 0,
+    "専門科目(コンピュータ科)": 0,
+    "専門科目(自然情報)": 0,
+    "専門科目(人間・社会情報)": 0
+}
+//htmlのid, 卒業要件データと結びつけるために作成
+const typeTranslate = { 
+    "基礎セミナー": "kisemi",
+    "言語文化1英": "eigo",
+    "言語文化1二": "nigai",
+    "健康スポーツ科学": "kensupo",
+    "文系基礎科目": "bunkei",
+    "文系教養科目": "bunkei",
+    "理系教養科目": "rikeikyouyou",
+    "全学教養科目": "zengakukyouyou",
+    "理系基礎(理系)": "rikeikiso",
+    "専門基礎科目": "senmonkiso",
+    "専門科目(自然情報)": senmonORkanrensenmonDict[majorIn][0],
+    "専門科目(人間・社会情報)": senmonORkanrensenmonDict[majorIn][1],
+    "専門科目(コンピュータ科)": senmonORkanrensenmonDict[majorIn][2]
+}
+//未選択で初期化
+for (let i = 0; i < 4; i++){
+    let gradTableF = {};
+    for (let j = 0; j < 4; j++){
+        let termTableF = {};
+        for (let k = 0; k < 5; k++){
+            let daysTableF = {};
+            for (let l = 0; l < 5; l++){
+                daysTableF[l] = {name: "未選択", type: "未選択", cred: 0, seme: "q"};
+            }
+            termTableF[k] = daysTableF
+        }
+        gradTableF[j] = termTableF;
+    }
+    currentTable[i] = gradTableF;
+}
+
+//選択中の連続講義を格納する
+let continuousLectures = [];
+
 
 //userTable[学期][曜日(各曜日2つずつ)][時限]
 let userTable = Array.from(new Array(8), () => {
@@ -104,6 +185,76 @@ for(let i = 0; i < 1; i++){ //grade
 
 
 
+function calcCred() {
+    calcedLect = [];
+    for (let i = 0; i < 4; i++){
+        for (let j = 0; j < 4; j++){
+            for (let k = 0; k < 5; k++){
+                for (let l = 0; l < 5; l++){
+                    //currentTableに基づいて計算する
+                    let selectElem = document.getElementById("select" + gradDict[i] + termDict[j] + daysDict[k] + timeDict[l]);
+                    if (!selectElem.value in calcedLect){
+                        let lectObj;
+                        lectureData[termDataDict[params[1]]][daysDataDict[params[2]]][timeDataDict[params[3]]].forEach(obj => {
+                            if(obj.name == selectElem.value){
+                                lectObj = obj;
+                                return true; //break の代わり
+                            }
+                        });
+                        currentCred[lectObj.type] += lectObj.cred;
+                        calcedLect.push(lect.name);
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
+const requiredSpanId = ["zengakukyouiku", "senmon", "zengakukiso", "kisokyouyou", "rikeikiso", "senmonkiso", "kisemi", "bunkeikamoku", "senmonkamoku", "eigo", "rikeikyouyou", "kanrensenmon", "nigai", "zengakukyouyou", "kensupo"];
+function showResult() {
+    
+    Object.keys(currentCred).forEach(type => {
+        // ここから再開
+    })
+    
+}
+
+function showRequired() {
+    requiredSpanId.forEach(spanId => {
+        let minSpan = document.getElementById(spanId + "-min");
+        let maxSpan = document.getElementById(spanId + "-max");
+        if (spanId == "zengakukyouiku" || spanId == "senmon"){
+            setCredValue(minSpan, requiredCred[subCourses][spanId]["total"][0]);
+            setCredValue(maxSpan, requiredCred[subCourses][spanId]["total"][1]);
+        } else if (spanId in requiredCred[subCourses]["zengakukyouiku"]) {
+            setCredValue(minSpan, requiredCred[subCourses]["zengakukyouiku"][spanId]["total"][0]);
+            setCredValue(maxSpan, requiredCred[subCourses]["zengakukyouiku"][spanId]["total"][1]);
+        } else if (spanId in requiredCred[subCourses]["senmon"]) {
+            setCredValue(minSpan, requiredCred[subCourses]["senmon"][spanId]["total"][0]);
+            setCredValue(maxSpan, requiredCred[subCourses]["senmon"][spanId]["total"][1]);
+        } else if (spanId in requiredCred[subCourses]["zengakukyouiku"]["zengakukiso"]){
+            setCredValue(minSpan, requiredCred[subCourses]["zengakukyouiku"]["zengakukiso"][spanId][0]);
+            setCredValue(maxSpan, requiredCred[subCourses]["zengakukyouiku"]["zengakukiso"][spanId][1]);
+        } else if (spanId in requiredCred[subCourses]["zengakukyouiku"]["kisokyouyou"]){
+            console.log(spanId);
+            setCredValue(minSpan, requiredCred[subCourses]["zengakukyouiku"]["kisokyouyou"][spanId][0]);
+            setCredValue(maxSpan, requiredCred[subCourses]["zengakukyouiku"]["kisokyouyou"][spanId][1]);
+        }
+        
+    })
+
+}
+
+function setCredValue(elem, value){
+    console.log("  " + elem.id)
+    if (value < 1000){
+        elem.innerText = value;
+    }
+}
+
+
 function changedSelectListenerWrapper(e){
     changedSelect(this.params);
 }
@@ -121,9 +272,9 @@ function changedSelect(params){
                 changedLectObj = obj;
                 return true; //break の代わり
             }
-        })
+        });
     } else {
-        changedLectObj = {name: "未選択", cred: 0, seme: "q"}
+        changedLectObj = {name: "未選択", type: "未選択", cred: 0, seme: "q"};
     }
     //連続講義の競合回避
     //春1に対する春2の割り込み
@@ -135,9 +286,10 @@ function changedSelect(params){
             changedSelect.selectedIndex = 0;
             return;
         }
-        //右の講義を未選択にする→非表示&colspanを2に
+        //右の講義を未選択にする&テーブルに反映→非表示&colspanを2に
         document.getElementById("select" + gradDict[params[0]] + termDict[params[1] + 1] + daysDict[params[2]] + timeDict[params[3]]).selectedIndex = 0;
         document.getElementById("select" + gradDict[params[0]] + termDict[params[1] + 1] + daysDict[params[2]] + timeDict[params[3]]).parentNode.parentNode.hidden = true;
+        currentTable[params[0]][params[1] + 1][params[2]][params[3]] = {name: "未選択", type: "未選択", cred: 0, seme: "q"};
 
         changedSelect.parentNode.parentNode.setAttribute("colSpan", "2");
         
@@ -276,15 +428,10 @@ function changedSelect(params){
         }
     }
 
-
+    currentTable[params[0]][params[1]][params[2]][params[3]] = changedLectObj;
 
     
 }
 
 
-
-/*
-function changedSelect(lectName, params){
-    console.log(lectName, params);
-}
-*/
+showRequired();
