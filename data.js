@@ -918,7 +918,7 @@ const lectureData = {
             time1: [
                 {
                     name: "健康スポーツ科学講義",
-                    type: "",
+                    type: "健康スポーツ科学",
                     seme: "s",
                     cred: 2
                 },
@@ -1916,7 +1916,7 @@ const lectureData = {
             time2: [
                 {
                     name: "健康スポーツ科学実習2",
-                    type: "",
+                    type: "健康スポーツ科学",
                     seme: "s",
                     cred: 1
                 },
