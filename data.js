@@ -2406,6 +2406,12 @@ const lectureData = {
                     type: "専門科目(自然情報)",
                     seme: "q",
                     cred: 1
+                },
+                {
+                    name: "画像処理",
+                    type: "専門科目(コンピュータ科)",
+                    seme: "q",
+                    cred: 2
                 }
             ],
             time4: [
@@ -2426,6 +2432,12 @@ const lectureData = {
                     type: "専門科目(自然情報)",
                     seme: "q",
                     cred: 1
+                },
+                {
+                    name: "画像処理",
+                    type: "専門科目(コンピュータ科)",
+                    seme: "q",
+                    cred: 2
                 }
             ],
             time5: [
@@ -2536,12 +2548,6 @@ const lectureData = {
                     cred: 1
                 },
                 {
-                    name: "画像処理",
-                    type: "専門科目(コンピュータ科)",
-                    seme: "q",
-                    cred: 2
-                },
-                {
                     name: "コンピュータ科学実験3",
                     type: "専門科目(コンピュータ科)",
                     seme: "q",
@@ -2572,12 +2578,6 @@ const lectureData = {
                     type: "専門基礎科目",
                     seme: "q",
                     cred: 1
-                },
-                {
-                    name: "画像処理",
-                    type: "専門科目(コンピュータ科)",
-                    seme: "q",
-                    cred: 2
                 },
                 {
                     name: "コンピュータ科学実験3",
