@@ -19,6 +19,9 @@
             border: 1px solid;
             width: 12.5%;
         }
+        #error-list li {
+            font-size: 12px;
+        }
 
     </style>
 
@@ -32,7 +35,7 @@
                     <tr>
                         <td>系を選んでね</td><td>
                             <select id="select-sub-course"><option value="情シス">情シス</option><option value="知シス">知シス</option></select>
-                        </td><td>卒業できる?</td><td>判定結果</td><td colspan="2">全学教育科目(専門系以外すべて)(<span id="zengakukyouiku-min"></span>~<span id="zengakukyouiku-max"></span>)&nbsp;合計:&nbsp;<span id="zengakukyouiku-total"></span></td>
+                        </td><td>卒業できる?</td><td id="can-graduate-result">判定結果</td><td colspan="2">全学教育科目(専門系以外すべて)(<span id="zengakukyouiku-min"></span>~<span id="zengakukyouiku-max"></span>)&nbsp;合計:&nbsp;<span id="zengakukyouiku-total"></span></td>
                     </tr>
                     <tr>
                         <td colspan="2">専門系科目(<span id="senmon-min"></span>~<span id="senmon-max"></span>)&nbsp;合計:&nbsp;<span id="senmon-total"></span></td><td colspan="2">全学基礎科目(<span id="zengakukiso-min"></span>~<span id="zengakukiso-max"></span>)&nbsp;合計:&nbsp;<span id="zengakukiso-total"></span></td><td colspan="2">文系基礎&文系教養&理系教養&全学教養(<span id="kisokyouyou-min"></span>~<span id="kisokyouyou-max"></span>)&nbsp;合計:&nbsp;<span id="kisokyouyou-total"></span></td><td colspan="2">理系基礎(<span id="rikeikiso-min"></span>~<span id="rikeikiso-max"></span>)&nbsp;合計:&nbsp;<span id="rikeikiso-total"></span></td>
@@ -43,16 +46,7 @@
                             <div>
                                 <div>エラー一覧</div>
                                 <div style="height:100px; overflow-x:scroll;">
-                                    <ul id="error-list">
-                                        <li>a</li>
-                                        <li>b</li>
-                                        <li>a</li>
-                                        <li>b</li>
-                                        <li>a</li>
-                                        <li>b</li>
-                                        <li>a</li>
-                                        <li>b</li>
-                                    </ul>
+                                    <ul id="error-list"></ul>
                                 </div>
                             </div>
                         </td>
@@ -66,7 +60,7 @@
                     <tr>
                         <td>卒業研究終わった?</td>
                         <td><select id="researchFinished"><option value="いいえ">いいえ</option><option value="はい">はい</option></select></td>
-                            <td>健スポ(<span id="kensupo-min"></span>~<span id="kensupo-max"></span>)</td><td><span id="kensupo-total"></span></td><td>その他</td><td>a</td>
+                            <td>健スポ(<span id="kensupo-min"></span>~<span id="kensupo-max"></span>)</td><td><span id="kensupo-total"></span></td><td>その他</td><td>未実装</td>
                     </tr>
                 </tbody>
             </table>

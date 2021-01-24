@@ -8,6 +8,7 @@
     ↑そこに各学年の表にジャンプするボタン
 
     [済]jsによる時間割のhtml要素tableの生成
+    [未]時間割データのエクスポート/インポート
     [未]各種処理を関数化
 
     [未]各所のfor文ぶん回しのゴリ押しを解消したい(データ構造の見直しが必要？)
@@ -23,6 +24,7 @@
     [済]春1/秋1でsを選んでいるコマが強制的に上書きされたときに,そのコマがs/qに対応したcolspanにならない
         ↑例) 月 春1 3限が地学→4限に離散
     [済]連続講義の判定からきせみを除外
+    [未]currentTableの連続講義による上書きをしていない
 */
 
 
@@ -46,12 +48,39 @@ let calcedLect = [];
 let subCourses = 0;
 document.getElementById("select-sub-course").addEventListener("change", changedSubCourse);
 function changedSubCourse(){
-    subCourses = document.getElementById("select-sub-course").selectedIndex;    
+    subCourses = document.getElementById("select-sub-course").selectedIndex;   
+    calcCred();
+    showResult(); 
 }
 
+let isFinishedResearch = 0;
+//卒業研究の選択ボタン
+document.getElementById("researchFinished").addEventListener("change", changedResearchFinished);
+function changedResearchFinished() {
+    switch(document.getElementById("researchFinished").selectedIndex){
+        case 0:
+            isFinishedResearch = 0;
+            break;
+        case 1:
+            isFinishedResearch = 6; //卒業研究の単位数
+            break;
+        default:
+            isFinishedResearch = 0;
+            break;
+    }
+    calcCred();
+    showResult();
+}
+
+
 //fixedの対応
-var headerbarHeight = document.getElementById("headerbar").clientHeight;
-document.getElementById("tablearea").style.paddingTop = (headerbarHeight + 20) + "px";
+function changeTablePadding(){
+    var headerbarHeight = document.getElementById("headerbar").clientHeight;
+    document.getElementById("tablearea").style.paddingTop = (headerbarHeight + 20) + "px";
+}
+window.onresize = changeTablePadding();
+
+
 
 //表のhtmlの生成
 function createTable(){
@@ -168,7 +197,14 @@ const typeTranslate = {
     "rikeikyouyou": "理系教養科目",
     "zengakukyouyou": "全学教養科目",
     "rikeikiso": "理系基礎(理系)",
-    "senmonkiso": "専門基礎科目"
+    "senmonkiso": "専門基礎科目",
+    "senmonkamoku": "専門科目",
+    "senmon": "専門系科目",
+    "kanrensenmon": "関連専門科目",
+    "bunkeikamoku": "文系教養&文系基礎", 
+    "kisokyouyou": "文系科目,理系教養,全学教養", 
+    "zengakukiso": "全学基礎", 
+    "zengakukyouiku": "全学教育科目"
 }
 //未選択で初期化
 for (let i = 0; i < 4; i++){
@@ -288,33 +324,73 @@ function calcCred() {
 
 const requiredSpanId = ["rikeikiso", "senmonkiso", "kisemi", "senmonkamoku", "eigo", "rikeikyouyou", "kanrensenmon", "nigai", "zengakukyouyou", "kensupo", "senmon", "bunkeikamoku", "kisokyouyou", "zengakukiso", "zengakukyouiku"];
 function showResult() {
-    /*
-    Object.keys(currentCred).forEach(type => {
-        
-    })
-    */
-   requiredSpanId.forEach(spanId => {
-    let targetSpan = document.getElementById(spanId + "-total");
-    if (spanId == "kanrensenmon"){
-        setCredValue(targetSpan, currentCred[senmonORkanrensenmonDict[3 + majorIn][1][0]] + currentCred[senmonORkanrensenmonDict[3 + majorIn][1][1]]);
-    } else if (spanId == "senmonkamoku"){
-        setCredValue(targetSpan, currentCred[senmonORkanrensenmonDict[3 + majorIn][0]]);
-    } else if (spanId == "senmon"){
-        setCredValue(targetSpan, Number(document.getElementById("kanrensenmon-total").innerHTML) + Number(document.getElementById("senmonkamoku-total").innerHTML) + Number(document.getElementById("senmonkiso-total").innerHTML));
-    } else if (spanId == "zengakukiso"){
-        setCredValue(targetSpan, Number(document.getElementById("kisemi-total").innerHTML) + Number(document.getElementById("eigo-total").innerHTML) + Number(document.getElementById("nigai-total").innerHTML) + Number(document.getElementById("kensupo-total").innerHTML));
-    } else if (spanId == "bunkeikamoku"){
-        setCredValue(targetSpan, currentCred["文系基礎科目"] + currentCred["文系教養科目"]);
-    } else if (spanId == "kisokyouyou"){
-        setCredValue(targetSpan, Number(document.getElementById("bunkeikamoku-total").innerHTML) + Number(document.getElementById("rikeikyouyou-total").innerHTML) + Number(document.getElementById("zengakukyouyou-total").innerHTML));
-    } else if (spanId == "zengakukyouiku"){
-        setCredValue(targetSpan, Number(document.getElementById("zengakukiso-total").innerHTML) + Number(document.getElementById("kisokyouyou-total").innerHTML) + Number(document.getElementById("rikeikiso-total").innerHTML));
-    } else {
-        setCredValue(targetSpan, currentCred[typeTranslate[spanId]]);
+    let canGuraduate = true;
+    //エラーの枠に表示するhtml
+    let errorInner = "";
+    requiredSpanId.forEach(spanId => {
+        let targetSpan = document.getElementById(spanId + "-total");
+        if (spanId == "kanrensenmon"){
+            setCredValue(targetSpan, Math.min(document.getElementById(spanId + "-max").innerHTML, currentCred[senmonORkanrensenmonDict[3 + majorIn][1][0]] + currentCred[senmonORkanrensenmonDict[3 + majorIn][1][1]]));
+        } else if (spanId == "senmonkamoku"){
+            setCredValue(targetSpan, Math.min(document.getElementById(spanId + "-max").innerHTML, currentCred[senmonORkanrensenmonDict[3 + majorIn][0]] + isFinishedResearch));
+        } else if (spanId == "senmon"){
+            setCredValue(targetSpan, Number(document.getElementById("kanrensenmon-total").innerHTML) + Number(document.getElementById("senmonkamoku-total").innerHTML) + Number(document.getElementById("senmonkiso-total").innerHTML));
+        } else if (spanId == "zengakukiso"){
+            setCredValue(targetSpan, Number(document.getElementById("kisemi-total").innerHTML) + Number(document.getElementById("eigo-total").innerHTML) + Number(document.getElementById("nigai-total").innerHTML) + Number(document.getElementById("kensupo-total").innerHTML));
+        } else if (spanId == "bunkeikamoku"){
+            setCredValue(targetSpan, currentCred["文系基礎科目"] + currentCred["文系教養科目"]);
+        } else if (spanId == "kisokyouyou"){
+            setCredValue(targetSpan, Number(document.getElementById("bunkeikamoku-total").innerHTML) + Number(document.getElementById("rikeikyouyou-total").innerHTML) + Number(document.getElementById("zengakukyouyou-total").innerHTML));
+        } else if (spanId == "zengakukyouiku"){
+            setCredValue(targetSpan, Number(document.getElementById("zengakukiso-total").innerHTML) + Number(document.getElementById("kisokyouyou-total").innerHTML) + Number(document.getElementById("rikeikiso-total").innerHTML));
+        } else {
+            setCredValue(targetSpan,currentCred[typeTranslate[spanId]]);
+        }
+
+        if (Number(targetSpan.innerHTML) < document.getElementById(spanId + "-min").innerHTML) {
+            errorInner += `<li>${typeTranslate[spanId]}の単位が足りません</li>`
+            canGuraduate = false;
+        }
+    });
+    //卒業要件を満たしているかチェック
+    let mustLects = [];
+    for(let i in requiredCred[subCourses]["zengakukyouiku"]["rikeikiso"]["lect"]){
+        mustLects.push(requiredCred[subCourses]["zengakukyouiku"]["rikeikiso"]["lect"][i]);
+    }
+    for(let i in requiredCred[subCourses]["senmon"]["senmonkiso"]["lect"]){
+        mustLects.push(requiredCred[subCourses]["senmon"]["senmonkiso"]["lect"][i]);
+    }
+    for(let i in requiredCred[subCourses]["senmon"]["senmonkamoku"]["lect"]){
+        mustLects.push(requiredCred[subCourses]["senmon"]["senmonkamoku"]["lect"][i]);
     }
     
-});
-    
+    for(let i in calcedLect){
+        let idx = mustLects.indexOf(calcedLect[i])
+        if(idx != -1){
+            mustLects.splice(idx, 1);
+        }
+    }
+    mustLects.forEach(lect =>{
+        errorInner += `<li>${lect}を履修していません</li>`;
+        canGuraduate = false;
+    });
+    if (isFinishedResearch == 0){
+        errorInner += `<li>卒業研究が終わっていません</li>`;
+        canGuraduate = false;
+    }
+    document.getElementById("error-list").innerHTML = errorInner;
+
+    switch(canGuraduate){
+        case true:
+            document.getElementById("can-graduate-result").innerHTML = "卒業できるよ！";
+            break;
+        case false:
+            document.getElementById("can-graduate-result").innerHTML = "まだ卒業できないよ";
+            break;
+        default:
+            document.getElementById("can-graduate-result").innerHTML = "まだ卒業できないよ";
+            break;
+    }
 }
 
 function showRequired() {
@@ -409,8 +485,6 @@ function changedSelect(params){
     } else {
         changedLectObj = {name: "未選択", type: "未選択", cred: 0, seme: "q"};
     }
-    //セレクタの値が変わったマスの色の変更
-    changeParentBGColor(changedSelect, changedLectObj);
     //連続講義の競合回避
     //春1に対する春2の割り込み
     
@@ -511,6 +585,7 @@ function changedSelect(params){
                             break;
                         }
                     }
+                    currentTable[params[0]][params[1]][params[2]][params[i]] = {name: "未選択", type: "未選択", cred: 0, seme: "q"};
                     break;
                 }
             }
@@ -570,6 +645,7 @@ function changedSelect(params){
                             break;
                         }
                     }
+                    currentTable[params[0]][params[1]][params[2]][params[i]] = {name: "未選択", type: "未選択", cred: 0, seme: "q"};
                     break;
                 }
             }
@@ -577,7 +653,8 @@ function changedSelect(params){
     }
 
     currentTable[params[0]][params[1]][params[2]][params[3]] = changedLectObj;
-
+    //セレクタの値が変わったマスの色の変更
+    changeParentBGColor(changedSelect, changedLectObj);
     calcCred();
     showResult();
 }
