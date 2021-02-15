@@ -11,7 +11,9 @@ Google Chrome(87.0.4280.141)
 1. このリポジトリをcloneもしくはDL
 2. timetable.htmlをブラウザで開く
 3. 専攻の系を選択
-4. 時間割を入力&卒業研究終わったか選択
+4. 時間割を入力&卒業研究終わったか選択  
+  
+github.ioで公開しました→ https://katesawada.github.io/graduate-checker/timetable.html
 
 ## License
 Copyright (c) 2021 KateSawada  
