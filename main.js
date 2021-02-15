@@ -169,7 +169,8 @@ const currentCredEmpty = {
     "専門基礎科目": 0,
     "専門科目(コンピュータ科)": 0,
     "専門科目(自然情報)": 0,
-    "専門科目(人間・社会情報)": 0
+    "専門科目(人間・社会情報)": 0,
+    "専門科目": 0
 }
 let currentCred = copyDict(currentCredEmpty);
 
@@ -332,7 +333,7 @@ function showResult() {
         if (spanId == "kanrensenmon"){
             setCredValue(targetSpan, Math.min(document.getElementById(spanId + "-max").innerHTML, currentCred[senmonORkanrensenmonDict[3 + majorIn][1][0]] + currentCred[senmonORkanrensenmonDict[3 + majorIn][1][1]]));
         } else if (spanId == "senmonkamoku"){
-            setCredValue(targetSpan, Math.min(document.getElementById(spanId + "-max").innerHTML, currentCred[senmonORkanrensenmonDict[3 + majorIn][0]] + isFinishedResearch));
+            setCredValue(targetSpan, Math.min(document.getElementById(spanId + "-max").innerHTML, currentCred[senmonORkanrensenmonDict[3 + majorIn][0]] + currentCred["専門科目"] + isFinishedResearch));
         } else if (spanId == "senmon"){
             setCredValue(targetSpan, Number(document.getElementById("kanrensenmon-total").innerHTML) + Number(document.getElementById("senmonkamoku-total").innerHTML) + Number(document.getElementById("senmonkiso-total").innerHTML));
         } else if (spanId == "zengakukiso"){
