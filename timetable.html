@@ -22,6 +22,17 @@
         #error-list li {
             font-size: 12px;
         }
+        label { /*https://qiita.com/d0ne1s/items/dd0ffa707ffe051969d7*/
+          background: rgb(31, 154, 35);
+          color: white;
+          font-size: 0.8rem;
+          padding: 8px 10px;
+          border-radius: 4px;
+          display: inline-block;
+          position: relative;
+          cursor: pointer;
+          margin-right: 8px;
+        }
 
     </style>
 
@@ -60,7 +71,15 @@
                     <tr>
                         <td>卒業研究終わった?</td>
                         <td><select id="researchFinished"><option value="いいえ">いいえ</option><option value="はい">はい</option></select></td>
-                            <td>健スポ(<span id="kensupo-min"></span>~<span id="kensupo-max"></span>)</td><td><span id="kensupo-total"></span></td><td>その他</td><td>未実装</td>
+                            <td>健スポ(<span id="kensupo-min"></span>~<span id="kensupo-max"></span>)</td><td><span id="kensupo-total"></span></td>
+                            <td>
+                                <button id="jsonDownload" onclick="jsonDownload();" style="display:none;"></button>
+                                <label for="jsonDownload">時間割をでダウンロード</label>
+                            </td>
+                            <td>
+                                <input id="jsonUpload" type="file" accept=".json" text="Upload" style="display: none;">
+                                <label for="jsonUpload">時間割を読み込み…</label>
+                            </td>
                     </tr>
                 </tbody>
             </table>

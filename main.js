@@ -152,6 +152,71 @@ const senmonORkanrensenmonDict = {
 //時間割データを保存する
 let currentTable = {};
 
+// download
+function jsonDownload(){
+    let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentTable));
+    let downloadLink = document.createElement('a');
+    downloadLink.setAttribute("href",dataStr);
+    downloadLink.setAttribute("download", "classtable.json");
+    downloadLink.click();
+}
+
+// upload
+const readAsTextReader = file => {
+    const reader = new FileReader();
+
+    return new Promise((resolve, reject) => {
+        reader.onloadstart = ev => {
+            console.log(`onloadstart: total=${ev.loaded}/${ev.loaded}`);
+        };
+
+        reader.onloadend = ev => {
+            console.log(`onloadend: total=${ev.loaded}/${ev.loaded}`);
+        };
+
+        reader.onprogress = ev => {
+            console.log(`onprogress: total=${ev.loaded}/${ev.loaded}`);
+        };
+
+        reader.onerror = () => {
+            reader.abort();
+            alert("不正な形式のjsonです")
+            reject('Unknown error occurred during reading the file');
+        };
+
+        reader.onload = () => {
+            console.log('onload');
+            resolve(JSON.parse(reader.result))
+        };
+
+        reader.readAsText(file);
+    });
+};
+window.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("jsonUpload").addEventListener("change", evt => {
+        let inputJson = evt.target.files[0];
+        readAsTextReader(inputJson).then(value => {
+        currentTable = value;
+        
+        for(let i = 0; i < 4; i++){ //grade
+            for(let j = 0; j < 4; j++){ //term
+                for(let k = 0; k < 5; k++){ //day
+                    for(let l = 0; l < 5; l++){ //time
+                        let selectElem = document.getElementById(`select-${i + 1}-${Math.floor(j / 2) + 1}-${j % 2 + 1}-${k + 1}-${l + 1}`);
+                        for (let opt = 0; opt < selectElem.options.length; opt ++){
+                            //console.log('Label：' + option.label) //or option.text
+                            if (selectElem.options[opt]["value"] == currentTable[i][j][k][l]["name"]){
+                                selectElem.options[opt].selected = true
+                                changedSelect([i, j, k, l]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        });
+    });
+});
 //単位集計用
 function copyDict(dict) {
     return JSON.parse(JSON.stringify(dict));
@@ -470,12 +535,12 @@ function changedSelectListenerWrapper(e){
 }
 
 function changedSelect(params){
-    console.log(params);
+    //console.log(params);
     //講義データのオブジェクト
     let changedLectObj;
     //値が変わったselect要素
     let changedSelect = document.getElementById("select" + gradDict[params[0]] + termDict[params[1]] + daysDict[params[2]] + timeDict[params[3]]);
-    console.log(changedSelect.value);
+    //console.log(changedSelect.value);
     if (changedSelect.value != "未選択"){
         lectureData[termDataDict[params[1]]][daysDataDict[params[2]]][timeDataDict[params[3]]].forEach(obj => {
             if(obj.name == changedSelect.value){
